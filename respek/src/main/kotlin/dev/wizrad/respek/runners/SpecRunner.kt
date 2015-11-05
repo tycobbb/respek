@@ -6,7 +6,7 @@ import org.junit.runner.notification.RunNotifier
 import org.junit.runners.ParentRunner
 
 class SpecRunner<T: Respek>(
-  val testClass: Class<T>) : ParentRunner<Child>(testClass) {
+  val testClass: Class<T>) : ParentRunner<ChildRunner>(testClass) {
 
   lateinit var spec: Respek
 
@@ -18,15 +18,15 @@ class SpecRunner<T: Respek>(
     }
   }
 
-  override fun getChildren(): MutableList<Child>? {
-    return spec.map({ ChildContext(testClass, it) })
+  override fun getChildren(): MutableList<ChildRunner>? {
+    return spec.map({ ExampleGroupRunner(testClass, it) })
   }
 
-  override fun describeChild(child: Child?): Description? {
+  override fun describeChild(child: ChildRunner?): Description? {
     return child?.description
   }
 
-  override fun runChild(child: Child?, notifier: RunNotifier?) {
+  override fun runChild(child: ChildRunner?, notifier: RunNotifier?) {
     child?.run(notifier!!)
   }
 }

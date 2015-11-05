@@ -1,10 +1,10 @@
 package dev.wizrad.respek.graph.throwables
 
 import dev.wizrad.respek.graph.Status
-import dev.wizrad.respek.graph.Test
+import dev.wizrad.respek.graph.Example
 
 class StatusFailure(
-  val test: Test,
+  val example: Example,
   val status: Status) : RuntimeException() {
 
 }

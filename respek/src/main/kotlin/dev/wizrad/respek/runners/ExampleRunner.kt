@@ -1,20 +1,19 @@
 package dev.wizrad.respek.runners
 
 import dev.wizrad.respek.graph.Respek
-import dev.wizrad.respek.graph.Test
-import dev.wizrad.respek.graph.throwables.StatusFailure
+import dev.wizrad.respek.graph.Example
 import org.junit.runner.Description
 import org.junit.runner.notification.RunNotifier
 
-class ChildTest<T: Respek>(
+class ExampleRunner<T: Respek>(
   val testClass: Class<T>,
-  val test: Test) : Child() {
+  val example:   Example) : ChildRunner() {
 
   override fun action(notifier: RunNotifier) {
-    test.run()
+    example.run()
   }
 
   override val description: Description by lazy {
-    Description.createTestDescription(testClass.name, test.description, id)
+    Description.createTestDescription(testClass.name, example.description, id)
   }
 }

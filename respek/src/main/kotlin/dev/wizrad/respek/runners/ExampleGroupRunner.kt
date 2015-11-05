@@ -1,19 +1,19 @@
 package dev.wizrad.respek.runners
 
 import dev.wizrad.respek.graph.Respek
-import dev.wizrad.respek.graph.Context
+import dev.wizrad.respek.graph.ExampleGroup
 import dev.wizrad.respek.graph.Hooks
 import org.junit.runner.Description
 import org.junit.runner.notification.RunNotifier
 
-class ChildContext<T: Respek>(
-  val testClass: Class<T>,
-  val context:   Context) : Child() {
+class ExampleGroupRunner<T: Respek>(
+  private val testClass: Class<T>,
+  private val group:     ExampleGroup) : ChildRunner() {
 
   val children = lazy {
-    context.map(
-      { Child.context(testClass, it) },
-      { Child.test(testClass, it) }
+    group.map(
+      { ChildRunner.group(testClass, it) },
+      { ChildRunner.example(testClass, it) }
     )
   }
 
@@ -22,18 +22,18 @@ class ChildContext<T: Respek>(
   //
 
   override fun action(notifier: RunNotifier) {
-    context.willRun()
+    group.willRun()
 
     for(child in children.value) {
       child.run(notifier)
     }
 
-    context.didRun()
+    group.didRun()
   }
 
   override val description: Description by lazy {
     Description
-      .createSuiteDescription(context.description, id)
+      .createSuiteDescription(group.description, id)
       .append(children.value.map { it.description })
   }
 

@@ -1,8 +1,8 @@
 package dev.wizrad.respek.runners
 
 import dev.wizrad.respek.graph.Respek
-import dev.wizrad.respek.graph.Context
-import dev.wizrad.respek.graph.Test
+import dev.wizrad.respek.graph.ExampleGroup
+import dev.wizrad.respek.graph.Example
 import dev.wizrad.respek.graph.throwables.HookFailure
 import dev.wizrad.respek.graph.throwables.StatusFailure
 import dev.wizrad.respek.graph.throwables.TestFailure
@@ -11,7 +11,7 @@ import org.junit.runner.notification.Failure
 import org.junit.runner.notification.RunNotifier
 import java.io.Serializable
 
-abstract class Child {
+abstract class ChildRunner {
 
   protected val id: Id = Id.next()
 
@@ -47,12 +47,12 @@ abstract class Child {
   //
 
   companion object {
-    fun <T: Respek> context(testClass: Class<T>, context: Context): ChildContext<T> {
-      return ChildContext(testClass, context)
+    fun <T: Respek> group(testClass: Class<T>, group: ExampleGroup): ExampleGroupRunner<T> {
+      return ExampleGroupRunner(testClass, group)
     }
 
-    fun <T: Respek> test(testClass: Class<T>, test: Test): ChildTest<T> {
-      return ChildTest(testClass, test)
+    fun <T: Respek> example(testClass: Class<T>, example: Example): ExampleRunner<T> {
+      return ExampleRunner(testClass, example)
     }
   }
 

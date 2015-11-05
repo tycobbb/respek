@@ -1,15 +1,15 @@
 package dev.wizrad.respek.graph
 
-import dev.wizrad.respek.dsl.Testable
+import dev.wizrad.respek.dsl.Test
 import dev.wizrad.respek.graph.throwables.TestFailure
 import dev.wizrad.respek.graph.interfaces.DebugPrintable
 import dev.wizrad.respek.graph.interfaces.Describable
 import dev.wizrad.respek.graph.interfaces.Parent
 import dev.wizrad.respek.graph.throwables.StatusFailure
 
-class Test(
-  private val node: DslNode<Test>,
-  private val parent: Parent) : Testable, Describable, DebugPrintable {
+class Example(
+  private val node: DslNode<Example>,
+  private val parent: Parent) : Test, Describable, DebugPrintable {
 
   fun run() {
     if(node.status != Status.Normal) {

@@ -8,13 +8,13 @@ interface Root : Definable {
 
 }
 
-interface Nestable : Definable, Hookable {
-  fun on(message: String, expression: Nestable.() -> Unit)
-  fun it(message: String, expression: Testable.() -> Unit)
-  fun xit(message: String, expression: Testable.() -> Unit)
+interface Context : Definable, Hookable {
+  fun on(message: String, expression: Context.() -> Unit)
+  fun it(message: String, expression: Test.() -> Unit)
+  fun xit(message: String, expression: Test.() -> Unit)
 }
 
-interface Testable {
+interface Test {
 
 }
 
@@ -23,7 +23,7 @@ interface Testable {
 //
 
 interface Definable {
-  fun given(message: String, expression: Nestable.() -> Unit)
+  fun given(message: String, expression: Context.() -> Unit)
 }
 
 interface Hookable {
