@@ -35,8 +35,6 @@ class ExampleGroup(
 
   //
   // Parent
-  //
-
   override fun runHooks(type: Hooks.Type) {
     parent?.runHooks(type)
     this.runOwnHooks(type)
@@ -52,8 +50,6 @@ class ExampleGroup(
 
   //
   // Nesting
-  //
-
   override fun given(message: String, expression: Context.() -> Unit) {
     this.appendContext(DslNode.given(message, expression))
   }
@@ -68,8 +64,6 @@ class ExampleGroup(
 
   //
   // Tests
-  //
-
   override fun it(message: String, expression: Test.() -> Unit) {
     this.appendTest(DslNode.test(message, expression))
   }
@@ -86,8 +80,6 @@ class ExampleGroup(
 
   //
   // Hookable
-  //
-
   override fun before(expression: () -> Unit) = hooks.before(expression)
   override fun beforeEach(expression: () -> Unit) = hooks.beforeEach(expression)
   override fun after(expression: () -> Unit)  = hooks.after(expression)
@@ -95,8 +87,6 @@ class ExampleGroup(
 
   //
   // Mappable
-  //
-
   override fun <T> map(groupTransform: ((ExampleGroup) -> T)?, exampleTransform: ((Example) -> T)?): MutableList<T> {
     val result = ArrayList<T>()
 
@@ -117,16 +107,12 @@ class ExampleGroup(
 
   //
   // Describable
-  //
-
   override val description: String get() {
     return node.message()
   }
 
   //
   // DebugPrintable
-  //
-
   override fun debugString(depth: Int): String {
     var result = "${this.paddedString(depth)}\n"
 

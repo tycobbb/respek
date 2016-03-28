@@ -21,8 +21,6 @@ abstract class Respek() : Root, Mappable {
 
   //
   // Definable
-  //
-
   override fun given(message: String, expression: Context.() -> Unit) {
     if(group != null) {
       throw SpecException("Spec ${javaClass.name} can only contain one `given` block at the root level")
@@ -34,16 +32,12 @@ abstract class Respek() : Root, Mappable {
 
   //
   // Mappable
-  //
-
   override fun <T> map(groupTransform: ((ExampleGroup) -> T)?, exampleTransform: ((Example) -> T)?): MutableList<T> {
     return arrayListOf(groupTransform!!(root))
   }
 
   //
   // Debugging
-  //
-
   override fun toString(): String {
     var result = this.javaClass.name
 

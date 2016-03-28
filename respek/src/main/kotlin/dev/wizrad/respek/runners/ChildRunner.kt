@@ -12,7 +12,6 @@ import org.junit.runner.notification.RunNotifier
 import java.io.Serializable
 
 abstract class ChildRunner {
-
   protected val id: Id = Id.next()
 
   abstract val description: Description
@@ -20,8 +19,6 @@ abstract class ChildRunner {
 
   //
   // execution
-  //
-
   fun run(notifier: RunNotifier) {
     if(description.isTest) {
       notifier.fireTestStarted(description)
@@ -43,9 +40,7 @@ abstract class ChildRunner {
   }
 
   //
-  // factory
-  //
-
+  // Factory
   companion object {
     fun <T: Respek> group(testClass: Class<T>, group: ExampleGroup): ExampleGroupRunner<T> {
       return ExampleGroupRunner(testClass, group)
@@ -57,9 +52,7 @@ abstract class ChildRunner {
   }
 
   //
-  // id
-  //
-
+  // Id
   protected data class Id private constructor(
     val value: Int) : Serializable {
 

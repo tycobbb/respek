@@ -19,8 +19,6 @@ class ExampleGroupRunner<T: Respek>(
 
   //
   // Child
-  //
-
   override fun action(notifier: RunNotifier) {
     group.willRun()
 
@@ -39,8 +37,6 @@ class ExampleGroupRunner<T: Respek>(
 
   //
   // Helpers
-  //
-
   private fun Description.append(children: List<Description>) : Description {
     for(child in children) {
       this.addChild(child)

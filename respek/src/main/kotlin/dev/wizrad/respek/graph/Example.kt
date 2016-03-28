@@ -30,8 +30,6 @@ class Example(
 
   //
   // Describable
-  //
-
   override val description: String get() {
     return node.message()
   }
@@ -42,8 +40,6 @@ class Example(
 
   //
   // DebugPrintable
-  //
-
   override fun debugString(depth: Int): String {
     return this.paddedString(depth)
   }

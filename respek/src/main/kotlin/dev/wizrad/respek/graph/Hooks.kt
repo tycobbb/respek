@@ -4,7 +4,6 @@ import dev.wizrad.respek.dsl.Hookable
 import java.util.ArrayList
 
 class Hooks : Hookable {
-
   enum class Type(val index: Int) {
     Before(0),
     BeforeEach(1),
@@ -20,16 +19,12 @@ class Hooks : Hookable {
 
   //
   // Execution
-  //
-
   fun run(type: Type) {
     hooks[type].run()
   }
 
   //
   // Hookable
-  //
-
   override fun before(expression: () -> Unit) {
     this.add(Type.Before, expression)
   }
@@ -52,8 +47,6 @@ class Hooks : Hookable {
 
   //
   // Hook
-  //
-
   private class Hook {
     private var closures: MutableList<() -> Unit> = ArrayList()
 
@@ -67,5 +60,4 @@ class Hooks : Hookable {
       }
     }
   }
-
 }

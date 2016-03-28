@@ -8,8 +8,6 @@ interface DslNode<T> {
 
   //
   // Factories
-  //
-
   companion object {
     fun on(message: String, expression: ExampleGroup.() -> Unit) : DslNode<ExampleGroup> {
       return prefixed("on", message, expression)

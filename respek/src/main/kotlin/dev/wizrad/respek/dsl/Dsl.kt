@@ -2,8 +2,6 @@ package dev.wizrad.respek.dsl
 
 //
 // Elements
-//
-
 interface Root : Definable {
 
 }
@@ -20,8 +18,6 @@ interface Test {
 
 //
 // Aspects
-//
-
 interface Definable {
   fun given(message: String, expression: Context.() -> Unit)
 }
