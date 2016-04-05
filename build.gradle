@@ -16,3 +16,19 @@ allprojects {
     jcenter()
   }
 }
+
+apply plugin: 'kotlin'
+
+dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  compile 'junit:junit:4.12'
+}
+
+repositories {
+  mavenCentral()
+}
+
+sourceSets {
+  main.java.srcDirs += 'src/main/kotlin'
+  test.java.srcDirs += 'src/test/kotlin'
+}
