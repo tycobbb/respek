@@ -3,6 +3,7 @@ package dev.wizrad.respek.runners
 import dev.wizrad.respek.graph.Respek
 import dev.wizrad.respek.graph.ExampleGroup
 import dev.wizrad.respek.graph.Example
+import dev.wizrad.respek.graph.throwables.ContextFailure
 import dev.wizrad.respek.graph.throwables.HookFailure
 import dev.wizrad.respek.graph.throwables.StatusFailure
 import dev.wizrad.respek.graph.throwables.TestFailure
@@ -27,7 +28,9 @@ abstract class ChildRunner {
     try {
       action(notifier)
     } catch(failure: HookFailure) {
-      // not sure what to do here
+      notifier.fireTestFailure(Failure(description, failure))
+    } catch(failure: ContextFailure) {
+      notifier.fireTestFailure(Failure(description, failure))
     } catch(failure: TestFailure) {
       notifier.fireTestFailure(Failure(description, failure))
     } catch(failure: StatusFailure) {
